@@ -1,4 +1,100 @@
-.myCustomStyle{
-	background-color:#ffefd5;
-	margin-bottom:15px;
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body{
+	font-family: 'Poppins', sans-serif;
+	min-height: 100%;
+	min-width: 100%;
+}
+
+.container{
+	display: flex;
+	flex-direction: column;
+	min-width: 100%;
+	min-height: 100%;
+}
+
+.header{
+	flex: 1;
+	background-image: url('/views/img/naslovna.jpg');
+	background-size: cover;
+	background-position: center;
+	text-align: center;
+
+	overflow: hidden;
+	min-height: 550px;
+	position: relative;
+}
+
+.title{
+	padding-top: 30px;
+	font-size: 8vh;
+	font-weight: bold;
+	position: relative;
+	
+
+	color: #FE8093;
+}
+
+.buttons{
+	min-height: 100%;
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	bottom: 30%;	
+}
+
+.buttonDiv{
+	flex: 1;
+	padding-top: 150px;
+	text-align: center;
+}
+
+.buttons button{
+	width: 200px;
+	height: 80px;
+	padding: 10px;
+	vertical-align: center;
+	display: inline-block;
+
+	transition: all 0.3s ease-in-out;
+
+	border: 2px solid black;
+    margin: 0;
+    overflow: visible;
+
+	outline: none;
+    background: transparent;
+
+    /* inherit font & color from ancestor */
+    color: inherit;
+    font: inherit;
+
+    /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+    line-height: normal;
+
+    /* Corrects font smoothing for webkit */
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+
+    /* Corrects inability to style clickable `input` types in iOS */
+    -webkit-appearance: none;
+}
+
+.buttons button:hover{
+	background: #FE8093;
+	transform: scale(1.1);
+	transition: all 0.3s ease-in-out;
+}
+
+.footer{
+	bottom: 0;
+	min-width: 100%;
+	position: fixed;
+	min-height: 5em;
+	background: black;
 }
