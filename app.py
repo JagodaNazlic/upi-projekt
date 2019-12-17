@@ -32,7 +32,16 @@ def index():
             "developer_organization": "PMF"}
     return template('index', data = data)
 
+@app.route('/static/<filename>')
+def server_static(filename):
+    return static_file(filename, root='./static/img')
+
+@app.route('/newA')
+def newAnimal():
+    return template('new_animal')
+
 
 run(app, host='localhost', port = 4040)
+
 
 
