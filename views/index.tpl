@@ -21,15 +21,26 @@
     <div class="container">
         <div class="header">
             <h1 class="title">MALA ŠAPA</h1>
-			<img src="/static/naslovna.jpg"/>
+			<img class = "naslovnaSlika" src="/static/naslovna.jpg"/>
         </div>		
-		
+		<div class = "dummy"></div>
         <div class="buttons">
             <div class="buttonDiv"><button onClick="parent.location='/newA'">Nova životinja</button></div>
-            <div class="buttonDiv"> <button>Pretraži</button></div>
+            <div class="buttonDiv"><button onClick="parent.location='/search'">Pretraži</button></div>
             <div class="buttonDiv"><button>Statistika</button></div>
         </div>
     </div>
+	
+	<div class="lista">
+ 
+    <ul class="animals">
+	 %for row in rows:
+      <li>
+        <a href="item{{row[0]}}">{{row[1]}}</a>
+
+      </li>
+	 %end
+    </ul>
     
     <div class="footer">
         

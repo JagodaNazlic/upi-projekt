@@ -14,7 +14,10 @@
 	<script type="text/javascript" src="/static/custom.js"></script>
     <script type="text/javascript" src="/static/bootstrap.min.js"></script> 
 </head>
+
+
 <body>
-	
+
+
 </body>
 </html>

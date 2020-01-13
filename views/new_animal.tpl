@@ -14,33 +14,63 @@
 	<script type="text/javascript" src="/static/custom.js"></script>
     <script type="text/javascript" src="/static/bootstrap.min.js"></script> 
 </head>
-<body>
+<body class="druga">
 	<h1>UNOS NOVE ŽIVOTINJE</h1>
-	<p>Vrsta: 
-		<input type="radio" name="vrsta" value="cat">Mačka
-		<input type="radio" name="vrsta" value="dog">Pas<br></p>
-		
-	<label for="ime">Ime: </label>
-	<input type="text" id="ime"/>
-	<br>
-	<label for="zdrst">Zdravstveno stanje: </label>
-	<input type="text" id="zdrst"/>
-	
-	<p>Spol: 
-		<input type="radio" name="spol" value="male">Muški
-		<input type="radio" name="spol" value="female">Ženski<br></p>
-		
-	<label for="dob">Dob: </label>
-	<input type="number" id="dob"/>
-	<br>
-	<label for="datOdlaska">Datum odlaska: </label>
-	<input type="text" id="datOdlaska"/>
-	<br>
-	<label for="fin">Financije: </label>
-	<input type="number" id="fin"/>
-	
-	<div class="btnUnesi"> <button>Unesi</button></div>
 
+	<form>
+		<fieldset data-role="controlgroup" data-type="horizontal">
+		<legend>Vrsta: </legend>
+		<input type="radio" name="vrsta" id="cat">
+		<label for="cat">Mačka</label>
+		<input type="radio" name="vrsta" id="dog">
+		<label for="dog">Pas</label>
+		</fieldset>
+
+	</form>
+		
+	<form>
+		<fieldset data-role="controlgroup" data-type="horizontal">
+		<legend>Spol: </legend>
+		<input type="radio" name="spol" id="M">
+		<label for="M">Muški</label>
+		<input type="radio" name="spol" id="F">
+		<label for="F">Ženski</label>
+		</fieldset>
+
+	</form>
+		
+	<form class="labelsForm">
+	<div class="inputGroup">
+	<input type="text" id="ime"/>
+	<label for="ime">Ime: </label>
+	</div>
 	
+	<div class="inputGroup">
+	<input type="number" id="dob"/>
+	<label for="dob">Dob: </label>
+	</div>
+	
+	<div class="inputGroup">
+	<input type="text" id="datOdlaska"/>
+	<label for="datOdlaska">Datum odlaska: </label>
+	</div>
+	
+	<div class="inputGroup"> 
+	<input type="number" id="fin"/>
+	<label for="fin">Financije: </label>
+	</div>
+	
+	<div class="inputGroup">
+	<div class="zdr">
+		<input type="text" id="zdrst"/>
+		<label for="zdrst">Zdravstveno stanje: </label>
+	</div>
+	</div>
+	</form>
+	
+	<button onClick="parent.location='/search'">
+          <input type="submit" value="Save" name="unesi" /><br />
+        </button>
+		
 </body>
 </html>

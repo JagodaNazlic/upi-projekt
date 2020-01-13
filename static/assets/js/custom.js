@@ -1,3 +1,12 @@
-function helloWorld(){
-	console.log("hello world!");
-}
+$(function() {
+	$(".labelsForm .inputGroup input").focusout(function() {
+	  var text_val = $(this).val();
+  
+	  if (text_val === "") {
+		$(this).removeClass("has-value");
+	  } else {
+		$(this).addClass("has-value");
+	  }
+	});
+  });
+  
