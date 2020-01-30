@@ -15,6 +15,51 @@
     <script type="text/javascript" src="/static/bootstrap.min.js"></script> 
 </head>
 <body>
-	<p>bok</p>
+	<div class = "cntn1">
+	<div class="btnNZD">
+		<button class="btnNZ" onClick="parent.location='/index'">Home</button>
+	</div>
+	<form action="/upd{{ update }}" method="POST" class = "formAnimal">
+		<div class="labels">
+			<input type="text" name="ime" value="{{imeziv}}" placeholder="Name..." />
+
+		<fieldset data-role="controlgroup" data-type="horizontal">
+		
+			<input type="radio" name="vrsta" id="cat" value="Cat">
+			<label for="cat">Cat</label>
+			<input type="radio" name="vrsta" id="dog" value="Dog">
+			<label for="dog">Dog</label>
+			</fieldset>
+
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<input type="radio" name="spol" id="M" value="Male">
+				<label for="M">Male</label>
+				<input type="radio" name="spol" id="F" value="Female">
+				<label for="F">Female</label>
+			</fieldset>
+		
+		
+
+				<input type="number" name="dob" value="{{ dob }}" placeholder="Age..." />
+
+				<input type="text" name="datOdlaska" value="{{ datodl }}" placeholder="Leaving date... "/>
+	
+				<input type="number" name="fin" value="{{ financije }}" placeholder="Finance..." />
+	
+				<input type="text" name="zdrst" value="{{ stanje }}" placeholder="Health condition..." />
+			</div>
+			
+<div class = "btnnnn">
+					<button type="submit" onClick="parent.location='/index'" class="btnNZ" value="Save" name="update">Save</button>
+				</div>
+	
+	</form>
+	
+</div>
+<div class = "aaaaa">
+
+	</div>
+	<div class="footer">
+	</div>
 </body>
 </html>

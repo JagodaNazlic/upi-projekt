@@ -1,165 +1,502 @@
-*{
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
 }
 
-body{
-	font-family: 'Poppins', sans-serif;
-	min-height: 100%;
-	min-width: 100%;
-	-webkit-font-smoothing: antialiased;
+/*pocetna*/
+
+.pocetna {
+  background-image: url("pravapocetna.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 900px;
 }
 
-.container{
-	display: flex;
-	flex-direction: column;
-	min-width: 100%;
-	min-height: 100%;
+.guestDiv {
+  text-align: center;
+  padding-top: 50px;
+}
+.guest {
+  display: inline-block;
+  border-radius: 50%;
+  font-size: 30px;
+  padding: 50px;
+  background-color: #ff7f50;
+  border: none;
+  width: 200px;
+  height: 200px;
 }
 
-.header{
-	flex: 1;
-
-	background-size: cover;
-	background-position: center;
-	text-align: center;
-
-	overflow: visible;
-	position: relative;
-}
-.dummy{
-	width: 100%;
-	height: 20px;
-}
-.naslovnaSlika{
-	width: 50%;
-	height: auto;
-	border-radius: 10px;
+.guest:hover {
+  color: white;
 }
 
-.title{
-	padding-top: 30px;
-	font-size: 8vh;
-	font-weight: bold;
-	position: relative;
-	
-
-	color: #FE8093;
+body {
+  font-family: "Poppins", sans-serif;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
-.buttons{
-	min-height: 100%;
-	flex: 1;
-	display: flex;
-	justify-self: center;
-	text-align: center;
-	bottom: 30%;	
+/*Sortiranje macke pasi*/
+.dropbtn {
+  background-color: #ff7f50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
 }
 
-.buttonDiv{
-	flex: 1;
-	text-align: center;
-	align-items: center;
+.dropdown {
+  position: relative;
+  display: inline-block;
+  padding-top: 3%;
+  padding-left: 3%;
+  padding-right: 5%;
 }
 
-.buttons button{
-	/* width: 200px;
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #ff7f50;
+}
+
+.sort{
+  background-color: #ff7f50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  width: 100px;
+  border: none
+}
+
+.home{
+  background-color: #ff7f50;
+  color: white;
+  padding: 16px;
+  font-size: 23px;
+  width: 120px;
+  margin: 2%;
+  border: none
+}
+
+.DeUp{
+  background-color: #ff7f50;
+  color: #fff;
+  border: none;
+  padding: 5px;
+  width: 85px;
+}
+
+/*Do ovdje*/
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-width: 100%;
+  min-height: 100%;
+}
+/* glavna */
+.header {
+  background-position: center;
+  text-align: center;
+  overflow: visible;
+  position: relative;
+  font-size: 30px;
+  height: 200px;
+  background-size: auto;
+}
+
+.title {
+  color: #ff7f50;
+  padding-top: 70px;
+  font-size: 100px;
+}
+.naslov {
+  height: 50px;
+  background-color: #ff7f50;
+  color: black;
+}
+.btnLO {
+  position: relative;
+  float: right;
+  font-size: 40px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: transparent;
+  border: none;
+}
+
+.btnLO:hover {
+  color: white;
+}
+
+.buttons {
+  min-height: 100%;
+  flex: 1;
+  display: block;
+  justify-self: center;
+  text-align: center;
+  bottom: 30%;
+  background-image: url("pocetna.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 230px;
+}
+
+.buttonDiv {
+  flex: 1;
+  text-align: center;
+  align-items: center;
+  padding: 14px 40px;
+}
+
+.buttons button {
+  /* width: 200px;
 	height: 80px;
 	padding: 10px; */
-	vertical-align: center;
-	display: inline-block;
+  vertical-align: center;
+  transition: all 0.3s ease-in-out;
 
-	transition: all 0.3s ease-in-out;
+  border: 2px solid black;
+  margin: 0;
+  overflow: visible;
 
-	border: 2px solid black;
-    margin: 0;
-    overflow: visible;
+  outline: none;
+  background: transparent;
 
-	outline: none;
-    background: transparent;
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+  font-size: 50px;
+  padding: 14px 40px;
 
-    /* inherit font & color from ancestor */
-    color: inherit;
-    font: inherit;
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
 
-    /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
-    line-height: normal;
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
 
-    /* Corrects font smoothing for webkit */
-    -webkit-font-smoothing: inherit;
-    -moz-osx-font-smoothing: inherit;
-
-    /* Corrects inability to style clickable `input` types in iOS */
-    -webkit-appearance: none;
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
 }
 
-.buttons button:hover{
-	background: #FE8093;
-	transform: scale(1.1);
-	transition: all 0.3s ease-in-out;
+.buttons button:hover {
+  background: #ff7f50;
+  transform: scale(1.1);
+  transition: all 0.3s ease-in-out;
 }
 
-
-.footer{
-	bottom: 0;
-	min-width: 100%;
-	position: fixed;
-	min-height: 5em;
-	background: #FE8093;
+.btnSU {
+  position: relative;
+  float: center;
+  font-size: 40px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: transparent;
+  border: none;
 }
 
-input[type="text"],
-input[type="number"]{
-	background: none;
-	border: none;
-	border-bottom: solid 2px #FE8093;
-	color: #FE8093;
-	padding: 15px 40px;
-	font-size: 18px;
-	display: block;
-	margin-top: 40px;
+.btnSU:hover {
+  color: white;
 }
 
-.zdr input{
-	width: 1000px;
-	margin-bottom: 50px;
+/* nova zivotinja*/
+.formAnimal {
+  margin-top: 5%;
+
+  display: grid;
+  grid-template-columns: 6fr 1fr;
+}
+.cntn1 {
+  display: grid;
+  grid-template-columns: 2fr 12fr;
 }
 
-input:focus, :active{
-	outline: none;
+.cntn {
 }
 
-.inputGroup{
-	display: block;
-	margin-left: 20px;
-	position: relative;
-
+.btnNZD,
+.labels,
+.saveB {
+  position: relative;
+  margin: 5px;
+  float: left;
+  width: 30%;
+  justify-self: center;
 }
 
-.inputGroup input{
-	padding: 10px 0px;
+.labels {
+  border-radius: 50px;
+  display: grid;
+  grid-gap: 3%;
+  font-size: 30px;
+  justify-self: center;
+  text-align: center;
+  height: 150%;
+  background-color: #ff7f50;
+  margin-right: 3;
 }
 
-.inputGroup label{
-	position: absolute;
-  	top: 20%;
-  	left: 0px;
-  	-webkit-transform: translateY(-20%);
-  	transform: translateY(-20%);
-  	font-family: "Georgia", "Cambria", "Times New Roman", "Times", serif;
-  	font-style: italic;
-  	font-size: 18px;
-  	color: #999;
-  	pointer-events: none;
-  	transition: all 0.15s ease-out 0s;
+.btnNZD {
+  text-align: center;
+  padding-top: 250px;
 }
 
-.inputGroup input:focus + label,
-.inputGroup input.has-value + label {
-  top: -3px;
-  font-size: 12px;
-  color: #aaa;
+.btnNZ {
+  display: inline-block;
+  border-radius: 50%;
+  font-size: 30px;
+  padding: 50px;
+  background-color: #ff7f50;
+  border: none;
+  width: 200px;
+  height: 200px;
+  margin-top: 5%;
 }
 
+input[type="text"] {
+  border-radius: 15px;
+  margin: 5px;
+  width: 70%;
+  justify-self: center;
+}
+input[type="number"] {
+  border-radius: 15px;
+  margin: 5px;
+  width: 70%;
+  justify-self: center;
+}
+.footer {
+  width: 100%;
+  background-image: url("novaziv.png");
+  bottom: 0;
+  height: 30%;
+  background-repeat: repeat-x;
+}
+.aaaaa {
+  height: 30%;
+}
+.btnnnn {
+  margin-top: 60%;
+}
+/*Search*/
 
+.headerS {
+  width: 100%;
+  height: 250px;
+  background-image: url(pretrazi.png);
+  background-size: auto;
+  background-repeat: repeat-x;
+  position: absolute;
+  top: 0;
+}
+
+/* Log In */
+.signin {
+  background-image: url("sign.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 700px;
+}
+.loginBox {
+  width: 380px;
+  height: 420px;
+  background-color: white;
+  color: #696969;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 70px 30px;
+  border-radius: 5px;
+  border: black;
+  border-style: solid;
+}
+
+.loginBox p {
+  font-weight: bold;
+}
+
+.loginBox input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.loginBox input[type="text"],
+input[type="password"] {
+  border: none;
+  border-bottom: 1px solid #020811;
+  background: transparent;
+  outline: none;
+  height: 40px;
+  color: #696969;
+  font-size: 14px;
+}
+
+.loginBox input[type="submit"] {
+  border: none;
+  outline: none;
+  height: 40px;
+  background: #020811;
+  font-size: 18px;
+  color: #696969;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.loginBox input[type="submit"]:hover {
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.loginBox a:hover {
+  color: black;
+}
+
+.loginBox .links {
+  bottom: 0;
+}
+
+/* Sign Up */
+.registerBox {
+  width: 380px;
+  height: 420px;
+  background: white;
+  color: #696969;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 70px 30px;
+  border-radius: 5px;
+  border: black;
+  border-style: solid;
+}
+
+.registerBox input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.registerBox input[type="text"],
+input[type="password"] {
+  border: none;
+  border-bottom: 1px solid #020811;
+  background: transparent;
+  outline: none;
+  height: 40px;
+  color: #696969;
+  font-size: 14px;
+}
+
+.registerBox input[type="email"] {
+  border: none;
+  border-bottom: 1px solid #020811;
+  background: transparent;
+  outline: none;
+  height: 40px;
+  color: #696969;
+  font-size: 14px;
+}
+
+.registerBox input[type="submit"] {
+  border: none;
+  outline: none;
+  height: 40px;
+  background: #020811;
+  font-size: 18px;
+  color: #696969;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.registerBox input[type="submit"]:hover {
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.registerBox a:hover {
+  color: #fff;
+}
+
+/* Lost Password */
+.poop {
+  width: 200px;
+  height: 200px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+/*table*/
+
+table{
+  width: 100%;
+  border: 3px solid black;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+th{
+  height: 15%;
+  background-color: #ff7f50;
+  color: #fff;
+}
+
+th, td{
+  text-align: center;
+  padding: 5px;
+  border-bottom: 1px solid black;
+  font-size: 20px;
+}
+
+.like {
+  background: url(https://abs.twimg.com/a/1446686284/img/t1/web_heart_animation.png);
+  background-repeat: no-repeat;
+  background-size: auto;
+  height: 70px;
+  width: 70px;
+  justify-self: center;
+}
+
+.like:hover {
+-webkit-animation: play 1s steps(7) ; 
+}
+
+@-webkit-keyframes play {
+ 0% { background-position: center; }
+  100% { background-position: -2800px 0px; }
+}

@@ -20,13 +20,13 @@
     <div class="container">
             <div class="header">
                 <div class="naslov">
-                    <button class="btnLO" onClick="parent.location='/logout'">Log out</button>
+                    <button class="btnLO" onClick="parent.location='/signUp'">Sign up</button>
+                    <button class="btnLO" onClick="parent.location='/logIn'">Log in</button>
                 </div>
             <h1 class="title">Little paw</h1>
             </div>		
         <div class="buttons">
-            <div class="buttonDiv"><button onClick="parent.location='/newA'">New animal</button></div>
-            <div class="buttonDiv"><button onClick="parent.location='/search'">Search</button></div>
+            <div class="buttonDiv"><button onClick="parent.location='/searchGuest'">Search</button></div>
         </div>
     </div>
 	 

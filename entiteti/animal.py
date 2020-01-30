@@ -1,6 +1,6 @@
 class Animal():
 
-    def __init__(self, id, ime, vrsta, dob, spol, zdr_stanje, dat_dolaska, dat_odlaska, financije, interes):
+    def __init__(self, id, ime, vrsta, dob, spol, zdr_stanje, dat_dolaska, dat_odlaska, financije, interes, id_radnika):
         self._id = id
         self._ime = ime
         self._vrsta = vrsta
@@ -11,6 +11,8 @@ class Animal():
         self._dat_odlaska = dat_odlaska
         self._financije = financije
         self._interes = interes
+        self._id_radnika = id_radnika
+        
         
 
     @property
@@ -53,6 +55,10 @@ class Animal():
     def interes(self):
         return self._interes
 
+    @property
+    def id_radnika(self):
+        return self._id_radnika
+
     
     def __str__(self):
         return """
@@ -67,7 +73,8 @@ class Animal():
         dat_odlaska: {7}
         financije: {8}
         interes: {9}
+        id_radnika: {10}
 
         ---------------
 
-        """.format(self._id, self._ime, self._vrsta, self._dob, self._spol, self._zdr_stanje, self._dat_dolaska, self._dat_odlaska, self._financije, self._interes)
+        """.format(self._id, self._ime, self._vrsta, self._dob, self._spol, self._zdr_stanje, self._dat_dolaska, self._dat_odlaska, self._financije, self._interes, self._id_radnika)
