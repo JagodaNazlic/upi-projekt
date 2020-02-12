@@ -36,41 +36,46 @@
 
 
 <table>
-  <tr>
-      <th>Name</th>
-              <th>Cat/Dog</th>
-              <th>Age</th>
-              <th>Gender</th>
-              <th>Health condition</th>
-              <th>Leaving date</th>
-              <th>Arrival date</th>
-              <th>Finance</th>
-              <th>Interes</th>
-              <th></th>
-    </tr>
-  %for dat in data:
-  <tr>
-      <td><label for="">{{dat[1]}}</label></td>     
-      <td><label for="">{{dat[2]}}</label></td>
-      <td><label for=""> {{dat[3]}}</label></td>
-      <td><label for="">{{dat[4]}} </label></td>
-      <td><label for="">{{dat[5]}}</label></td>
-      <td><label for="">{{dat[6]}}</label></td>
-      <td><label for="">{{dat[7]}}</label></td>
-      <td><label for="">{{dat[8]}} kn</label></td>
-      <td><label for="">{{ dat[9] }} </label></td>
+    <tr>
+        <th>Name</th>
+                <th>Cat/Dog</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Health condition</th>
+                <th>Leaving date</th>
+                <th>Arrival date</th>
+                <th>Finance</th>
+                <th>Interes</th>
+                <th></th>
+                <th></th>
+      </tr>
+    %for dat in data:
+    <tr>
+        <td><label for="">{{dat[1]}}</label></td>     
+        <td><label for="">{{dat[2]}}</label></td>
+        <td><label for=""> {{dat[3]}}</label></td>
+        <td><label for="">{{dat[4]}} </label></td>
+        <td><label for="">{{dat[5]}}</label></td>
+        <td><label for="">{{dat[6]}}</label></td>
+        <td><label for="">{{dat[7]}}</label></td>
+        <td><label for="">{{dat[8]}} kn</label></td>
+        <td><label for="">{{ dat[9]}} </label></td>
 
-      <td><a href="like{{dat[0]}}"><div name='lajk' class="like"></div></a></td>
-      
-      <br>
-      
-      
-  </tr>
-  
-  
-  
-  
-  %end
+        <td><a href="like{{dat[0]}}"><div name='lajk' class="like"></div></a></td>
+        %if dat[11]==0:
+            <td><a href="udomi{{dat[0]}}"><button type="submit" value="Save" name="udomi">ADOPT</button></a></td>
+        %else:
+            <td>I've found<br> an owner!</td>
+        %end
+        <br>
+        
+        
+    </tr>
+    
+    
+    
+    
+    %end
 </table>
 
 

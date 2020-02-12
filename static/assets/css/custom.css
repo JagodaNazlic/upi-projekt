@@ -9,12 +9,12 @@ html {
 
 /*pocetna*/
 
-.pocetna {
+/*.pocetna {
   background-image: url("pravapocetna.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 900px;
-}
+}*/
 
 .guestDiv {
   text-align: center;
@@ -298,6 +298,14 @@ input[type="number"] {
   width: 70%;
   justify-self: center;
 }
+
+input[type="email"] {
+  border-radius: 15px;
+  margin: 5px;
+  width: 70%;
+  justify-self: center;
+}
+
 .footer {
   width: 100%;
   background-image: url("novaziv.png");
@@ -499,4 +507,47 @@ th, td{
 @-webkit-keyframes play {
  0% { background-position: center; }
   100% { background-position: -2800px 0px; }
+}
+
+
+.images{
+  display: inline;
+}
+
+.udomi{
+  display: block;
+  margin-left: 15%;
+}
+
+.udomi input[type="text"]{
+  height: 50px;
+  width: 300px;
+  margin: 1%;
+}
+.udomi input[type="email"]{
+  height: 50px;
+  width: 300px;
+  margin: 1%;
+}
+
+.ud{
+  background-color: red;
+  color: white;
+  max-width: 68%;
+  padding: 3%;
+  margin: 5%;
+  font-size: 20px;
+}
+
+.btnUdomi{
+  margin-top: 3%;
+  font-size: 20px;
+  padding: 1%;
+  width: 400px;
+  border-radius: 50px;
+}
+
+.udomib{
+  background-color:  #ffcccc
+  ;
 }

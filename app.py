@@ -3,7 +3,7 @@ from bottle import Bottle, run,redirect, \
 
 import os, sys, sqlite3, datetime
 
-from create_database import citajPodatke,samoMace,samoPsi, sacuvaj_zivotinju, signUpRadnik, logInRadnik, azuriraj, azurirajZivotinju, interes, idRadnika, citajPodatkeLog, sortiranje
+from create_database import citajPodatke,samoMace,samoPsi,udom, sacuvaj_zivotinju, signUpRadnik, logInRadnik, azuriraj, azurirajZivotinju, interes, idRadnika, citajPodatkeLog, sortiranje
 
 citajPodatke()
 save_id=0
@@ -29,6 +29,8 @@ def send_js(filename):
 def send_jsmap(filename):
     return static_file(filename, root=dirname+'/static/assets/js')
 
+
+
 @app.route('/search',method=['GET','POST'])
 def ucitaj():
     data = citajPodatkeLog(idRadnika(user))
@@ -50,8 +52,10 @@ def newAnimal():
         financije = request.POST.get('fin')
         interes = "0"
         id_radnika = idRadnika(user)
+    
+        udomljen = 0
         
-        sacuvaj_zivotinju(imeziv, vrsta, dob, spol, zdr_stanje, datodl, datdol, financije, interes, id_radnika)
+        sacuvaj_zivotinju(imeziv, vrsta, dob, spol, zdr_stanje, datodl, datdol, financije, interes, id_radnika, udomljen)
         
 
         redirect('/index')
@@ -72,12 +76,13 @@ def upd(upd):
         spol = request.POST.get('spol')
         zdr_stanje = request.POST.get('zdrst')
         datodl = request.POST.get('datOdlaska')
-        datdol = datetime.datetime.now()
+        datdol = datetime.datetime.now().date()
         financije = request.POST.get('fin')
         interes = "0"
         id_radnika = idRadnika(user)
         save_id=id_radnika
-        azuriraj(imeziv, vrsta, dob, spol, zdr_stanje, datodl, datdol, financije, interes, id_radnika, update)
+        udomljen = 0
+        azuriraj(imeziv, vrsta, dob, spol, zdr_stanje, datodl, datdol, financije, interes, id_radnika,udomljen, update)
         
 
         redirect('/index')
@@ -161,10 +166,7 @@ def lajk(like):
 
 @app.route('/maca')
 def mace():
-    global save_id
-    print("ovo je save_id")
-    print(save_id)
-    rezultat=samoMace(save_id)
+    rezultat=samoMace()
     data=rezultat
     print("OVO JE REZULTAT:")
     print(data)
@@ -172,10 +174,7 @@ def mace():
 
 @app.route('/psi')
 def psi():
-    global save_id
-    print("ovo je save_id")
-    print(save_id)
-    rezultat=samoPsi(save_id)
+    rezultat=samoPsi()
     data=rezultat
     print("OVO JE REZULTAT:")
     print(data)
@@ -193,6 +192,18 @@ def sortiraj():
 def pocetna():
     
     return template('pocetna')
+
+
+@app.route('/udomi<udomi:re:[0-9]+>',method=['GET','POST'])
+def udomii(udomi):
+    idd = udomi
+    if request.POST.get('moze','').strip():
+        udom(idd)
+        redirect('/searchGuest')
+    else:
+        return template('udomi', idd=idd)
+
+
 
 @app.route('/searchGuest')
 def pocetna():

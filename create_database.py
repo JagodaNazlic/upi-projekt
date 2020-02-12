@@ -30,7 +30,8 @@ def demoPodaci():
         dat_odlaska TEXT,
         financije REAL,
         interes INTEGER,
-        id_radnika INTEGER);
+        id_radnika INTEGER,
+        udomljen INTEGER);
         """)
 
         cur.executescript("""
@@ -48,7 +49,7 @@ def demoPodaci():
         print("Uspjesno")
         cur.execute("INSERT INTO radnici (ime_prezime, username, sifra) VALUES (?,?,?)", ("Martina_Nemet", "mnemet", "123"))
         con.commit()
-        cur.execute("INSERT INTO animals (ime, vrsta, dob, spol, zdr_stanje, dat_dolaska, dat_odlaska, financije, interes, id_radnika) VALUES (?,?,?,?,?,?,?,?,?,?)", ("Pancho", "mačak", 3, "muški", "dobro", "12.1.2018.", "12.1.2019", 1024, 100, 1))
+        cur.execute("INSERT INTO animals (ime, vrsta, dob, spol, zdr_stanje, dat_dolaska, dat_odlaska, financije, interes, id_radnika, udomljen) VALUES (?,?,?,?,?,?,?,?,?,?,?)", ("Pancho", "mačak", 3, "muški", "dobro", "12.1.2018.", "12.1.2019", 1024, 100, 1, 0))
         con.commit()
 
         print("Uspješno unesen mačak")
@@ -59,12 +60,12 @@ def demoPodaci():
 
     con.close()
     
-def samoMace(save_id):
+def samoMace():
     con = sqlite3.connect('baza_podataka.db')   
     try:
         cur=con.cursor()
         vrsta="Cat"
-        cur.execute('SELECT * FROM animals WHERE id_radnika= (?) AND vrsta= (?)',(save_id,vrsta,)) 
+        cur.execute('SELECT * FROM animals WHERE vrsta= (?)',(vrsta,)) 
         rows=cur.fetchall()
         
         
@@ -75,12 +76,12 @@ def samoMace(save_id):
     con.close()
     return rows
 
-def samoPsi(save_id):
+def samoPsi():
     con = sqlite3.connect('baza_podataka.db')   
     try:
         cur=con.cursor()
         vrsta="Dog"
-        cur.execute('SELECT * FROM animals WHERE id_radnika= (?) AND vrsta= (?)',(save_id,vrsta,)) 
+        cur.execute('SELECT * FROM animals WHERE vrsta= (?)',(vrsta,)) 
         rows=cur.fetchall()
         
         
@@ -239,7 +240,7 @@ def logInRadnik(username, password):
     
             
 
-def sacuvaj_zivotinju(ime, vrsta, dob, spol, zdr_stanje, dat_dolaska, dat_odlaska, financije, interes, id_radnika):
+def sacuvaj_zivotinju(ime, vrsta, dob, spol, zdr_stanje, dat_dolaska, dat_odlaska, financije, interes, id_radnika, udomljen):
     
     con = sqlite3.connect("baza_podataka.db")
 
@@ -247,7 +248,7 @@ def sacuvaj_zivotinju(ime, vrsta, dob, spol, zdr_stanje, dat_dolaska, dat_odlask
     try:
 
         cur = con.cursor()
-        cur.execute("INSERT INTO animals (ime, vrsta, dob, spol, zdr_stanje, dat_dolaska, dat_odlaska, financije, interes, id_radnika) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (ime, vrsta, dob, spol, zdr_stanje, dat_dolaska, dat_odlaska, financije, interes, id_radnika))
+        cur.execute("INSERT INTO animals (ime, vrsta, dob, spol, zdr_stanje, dat_dolaska, dat_odlaska, financije, interes, id_radnika, udomljen) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (ime, vrsta, dob, spol, zdr_stanje, dat_dolaska, dat_odlaska, financije, interes, id_radnika, udomljen))
         if ime != ""  and vrsta != None and dob != "" and spol != None and zdr_stanje != "" and financije != "":
             
             con.commit()
@@ -257,7 +258,7 @@ def sacuvaj_zivotinju(ime, vrsta, dob, spol, zdr_stanje, dat_dolaska, dat_odlask
         print("Uspjesno dodana nova zivotinja")
         
     except Exception as e:
-        print("Greška", e)
+        print("Greška 1", e)
         con.rollback()
     con.close()
 
@@ -287,11 +288,11 @@ def dohvati_id_zivotinje(animal_id):
 
     try:
         cur = con.cursor()
-        cur.execute("SELECT ime, vrsta, dob, spol, zdr_stanje, dat_dolaska, dat_odlaska, financije, interes, id_radnika FROM animals WHERE id=?;", (animal_id))
+        cur.execute("SELECT ime, vrsta, dob, spol, zdr_stanje, dat_dolaska, dat_odlaska, financije, interes, id_radnika, udomljen FROM animals WHERE id=?;", (animal_id))
         podaci = cur.fetchall()
 
         print("Podaci : ", podaci)
-        animal = Animal(podaci[0], podaci[1], podaci[2], podaci[3], podaci[4],podacia[5], podaci[6], podaci[7], podaci[8], podaci[9], podaci[10])
+        animal = Animal(podaci[0], podaci[1], podaci[2], podaci[3], podaci[4],podacia[5], podaci[6], podaci[7], podaci[8], podaci[9], podaci[10], podaci[11])
 
         print("Uspjesno dohvacena zivotinja")
         
@@ -337,11 +338,11 @@ def azurirajZivotinju(update):
     return result
 
 
-def azuriraj(imeziv, vrsta, dob, spol,zdr_stanje, dat_dolaska, dat_odlaska, financije, interes, id_radnika,update):
+def azuriraj(imeziv, vrsta, dob, spol,zdr_stanje, dat_dolaska, dat_odlaska, financije, interes, id_radnika,udomljen, update):
     con = sqlite3.connect('baza_podataka.db')
     try:
         cur = con.cursor()
-        cur.execute('UPDATE animals SET ime = (?), vrsta = (?), dob=(?), spol = (?), zdr_stanje=(?), dat_dolaska = (?), dat_odlaska = (?), financije = (?), interes=(?), id_radnika =(?) WHERE id= (?)',(imeziv, vrsta, dob, spol,zdr_stanje, dat_dolaska, dat_odlaska, financije, interes, id_radnika,update,))
+        cur.execute('UPDATE animals SET ime = (?), vrsta = (?), dob=(?), spol = (?), zdr_stanje=(?), dat_dolaska = (?), dat_odlaska = (?), financije = (?), interes=(?), id_radnika =(?), udomljen = (?) WHERE id= (?)',(imeziv, vrsta, dob, spol,zdr_stanje, dat_dolaska, dat_odlaska, financije, interes, id_radnika,udomljen,update,))
         con.commit()
     
     
@@ -369,8 +370,20 @@ def interes(idd):
     con.close()   
 
 
+def udom(idd):
+    print(idd)
+    con = sqlite3.connect("baza_podataka.db")
+    try:
+        cur = con.cursor()
 
-
+        cur.execute('SELECT * FROM animals WHERE id = (?)', (idd,))
+        cur.execute('UPDATE animals SET udomljen = (?) WHERE id = (?)', (1, idd,))
+        con.commit()
+    
+    except Exception as e:
+        print("Error at lajk: ", e)
+        con.rollback
+    con.close()   
 
 
 

@@ -9,7 +9,8 @@
       href="https://fonts.googleapis.com/css?family=Poppins&display=swap"
       rel="stylesheet"
     />
-
+    <link rel="stylesheet" type="text/css" href="/static/viewer.css">
+    <script type="text/javascript" src="/static/viewer.js"></script>
     <script type="text/javascript" src="/static/custom.js"></script>
     <title>Little paw</title>
   </head>
@@ -23,6 +24,19 @@
         </div>
 <div class="guestDiv">
     <button class="guest" onclick="parent.location='/index_guest'">Continue <br>as guest</button>
+</div>
+<div>
+  <img id="image" src="static/pravapocetna.png" alt="Picture">
+</div>
+
+<div>
+  <ul id="images">
+    <li><img src="static/prva.jpg" alt="Picture 1"></li>
+    <li><img src="static/druga.jpg" alt="Picture 2"></li>
+    <li><img src="static/treca.jpg" alt="Picture 3"></li>
+    <li><img src="static/cetvrta.jpg" alt="Picture 4"></li>
+    <li><img src="static/peta.jpg" alt="Picture 5"></li>
+  </ul>
 </div>
 </div>
   </body>

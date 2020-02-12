@@ -43,6 +43,7 @@
                 <th>Finance</th>
                 <th>Interes</th>
                 <th></th>
+                <th></th>
       </tr>
     %for dat in data:
     <tr>
@@ -54,10 +55,16 @@
         <td><label for="">{{dat[6]}}</label></td>
         <td><label for="">{{dat[7]}}</label></td>
         <td><label for="">{{dat[8]}} kn</label></td>
-        <td><label for="">{{ dat[9] }} </label></td>
+        <td><label for="">{{ dat[9]}} </label></td>
 
         <td><a href="like{{dat[0]}}"><div name='lajk' class="like"></div></a></td>
-        
+        %if dat[11]==0 and dat[6]=='':
+            <td><a href="udomi{{dat[0]}}"><button type="submit" value="Save" name="udomi">ADOPT</button></a></td>
+        %elif dat[11]==1:
+            <td>I've found<br> an owner!</td>
+        %elif dat[6]!='':
+            <td>I've found<br> an owner!</td>
+        %end
         <br>
         
         
