@@ -517,6 +517,7 @@ th, td{
 .udomi{
   display: block;
   margin-left: 15%;
+  margin-top: 10%;
 }
 
 .udomi input[type="text"]{
@@ -531,8 +532,7 @@ th, td{
 }
 
 .ud{
-  background-color: red;
-  color: white;
+  color: black;
   max-width: 68%;
   padding: 3%;
   margin: 5%;
@@ -548,6 +548,5 @@ th, td{
 }
 
 .udomib{
-  background-color:  #ffcccc
-  ;
+  background-color:  #ff7f50;
 }

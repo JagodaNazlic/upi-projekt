@@ -13,29 +13,30 @@
   </head>
 
   <body class = "udomib">
-    <div class="ud">
-<p>
-  <h1>READ THIS!</h1>
-  Be aware that by clicking 'I agree' you are giving us permition to check up on you and your adopted animal anytime we feel the need.<br>
-  We can also take your new pet if we feel that you are not taking good care!
-  It is in our best inetrest to make sure that 
-  both you and your new pet have a nice life!
-  <br>
-  Also, have in mind that providing for animal is not easy so think twice before adopting.
-   
-</p>
-
-    </div>
-
 
     <form action="/udomi{{idd}}" method="POST" class="udomi">
         
         <input type="text" name="imeU"  placeholder="Name..." /><br>
-        <input type="text" name="adresa"  placeholder="Adress..." /><br>
-        <input type="email" name="mejl" placeholder="E-mail... "/><br>
+        <input type="text" name="mejl" placeholder="E-mail... "/><br>
+        <input type="text" name="razlog"  placeholder="Why do you want this animal?" /><br>
 
-        <td><button type="submit" onClick="parent.location='/'" class="btnUdomi" value="Save" name="moze">I agree</button></td>
+
+        <td><button type="submit" onClick="parent.location='/searchGuest'" class="btnUdomi" value="Save" name="moze">I agree</button></td>
         
-	</form>
+  </form>
+  
+  <div class="ud">
+    <p>
+      Be aware that by clicking 'I agree' you are giving us permition to check up on you and your adopted animal anytime we feel the need.<br>
+      We can also take your new pet if we feel that you are not taking good care!
+      It is in our best inetrest to make sure that 
+      both you and your new pet have a nice life!
+      <br>
+      Also, have in mind that providing for animal is not easy so think twice before adopting.
+       
+    </p>
+    
+        </div>
+    
   </body>
   </html>

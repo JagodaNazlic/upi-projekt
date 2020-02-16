@@ -3,7 +3,9 @@ from bottle import Bottle, run,redirect, \
 
 import os, sys, sqlite3, datetime
 
-from create_database import citajPodatke,samoMace,samoPsi,udom, sacuvaj_zivotinju, signUpRadnik, logInRadnik, azuriraj, azurirajZivotinju, interes, idRadnika, citajPodatkeLog, sortiranje
+from create_database import citajPodatke,samoMace,samoPsi, prihvatiZ, sacuvaj_zivotinju, signUpRadnik, \
+     logInRadnik, azuriraj, azurirajZivotinju, interes, idRadnika, citajPodatkeLog, sortiranje, \
+     sacuvaj_udomitelja, citajPodatkeUd, idZodU, imeZivotinje
 
 citajPodatke()
 save_id=0
@@ -29,11 +31,9 @@ def send_js(filename):
 def send_jsmap(filename):
     return static_file(filename, root=dirname+'/static/assets/js')
 
-
-
 @app.route('/search',method=['GET','POST'])
 def ucitaj():
-    data = citajPodatkeLog(idRadnika(user))
+    data = citajPodatke()
     print("ovo su podaci:")
     print(data)
     return template('search', data = data, template_lookup=[template_path])
@@ -195,20 +195,28 @@ def pocetna():
 
 
 @app.route('/udomi<udomi:re:[0-9]+>',method=['GET','POST'])
-def udomii(udomi):
+def udomi(udomi):
     idd = udomi
     if request.POST.get('moze','').strip():
-        udom(idd)
+        ime_prezime = request.POST.get('imeU')
+        email = request.POST.get('mejl')
+        razlog = request.POST.get('razlog')
+        id_zivotinje = idd
+        ime_ziv = imeZivotinje(idd)
+        prihvaceno = 0
+        print('ppp')
+        sacuvaj_udomitelja(ime_prezime, email, razlog, id_zivotinje, ime_ziv, prihvaceno)
+        data = citajPodatkeUd()
+        print(data)
         redirect('/searchGuest')
     else:
-        return template('udomi', idd=idd)
+        return template('udomi', idd = idd)
 
 
 
 @app.route('/searchGuest')
 def pocetna():
     data = citajPodatke()
-
     print(data)
     return template('searchGuest', data = data, template_lookup=[template_path])
 
@@ -216,6 +224,37 @@ def pocetna():
 def index():
     
     return template('index')
+
+@app.route('/prijave')
+def prijave():
+    data = citajPodatkeUd()
+
+    return template('prijave', data = data, template_lookup=[template_path])
+
+@app.route('/povijest')
+def prijave():
+    data = citajPodatkeUd()
+
+    return template('povijest', data = data, template_lookup=[template_path])
+
+@app.route('/deleteU<deleteU:re:[0-9]+>')
+def deleteU_deleteU(deleteU):
+    con=sqlite3.connect('baza_podataka.db')
+    cur=con.cursor()
+    idd=deleteU
+    cur.execute('DELETE FROM udomitelji WHERE id=?',(idd,))
+    con.commit()
+    con.close()
+    redirect('/prijave')
+
+@app.route('/prihvati<prihvati:re:[0-9]+>', method=['GET','POST'])
+def prihvati(prihvati):
+    idd = prihvati
+    vrijeme = datetime.datetime.now().date()
+    idzivotinje = idZodU(idd)
+    prihvatiZ(idzivotinje, idd, vrijeme)
+    redirect('/index')
+
 
 @app.route('/index_guest')
 def index():

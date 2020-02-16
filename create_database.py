@@ -6,12 +6,12 @@ sys.path.append(dirname.replace('\\', '/') + '/entiteti/')
 
 from animal import Animal
 from radnik import Radnik
+from udomitelj import Udomitelj
 
 ##con = sqlite3.connect("baza_podataka.db")
 ##
 def demoPodaci():
     con = sqlite3.connect("baza_podataka.db")
-
 
     try:
         cur = con.cursor()
@@ -44,12 +44,28 @@ def demoPodaci():
         username TEXT,
         sifra TEXT);
         """)
+
+        cur.executescript("""
+
+        DROP TABLE IF EXISTS udomitelji;
+
+        CREATE TABLE udomitelji (
+        id INTEGER PRIMARY KEY,
+        ime_prezime TEXT,
+        email TEXT,
+        razlog TEXT,
+        id_zivotinje INTEGER,
+        ime_ziv TEXT,
+        prihvaceno INTEGER);
+        """)
         
 
         print("Uspjesno")
         cur.execute("INSERT INTO radnici (ime_prezime, username, sifra) VALUES (?,?,?)", ("Martina_Nemet", "mnemet", "123"))
         con.commit()
         cur.execute("INSERT INTO animals (ime, vrsta, dob, spol, zdr_stanje, dat_dolaska, dat_odlaska, financije, interes, id_radnika, udomljen) VALUES (?,?,?,?,?,?,?,?,?,?,?)", ("Pancho", "mačak", 3, "muški", "dobro", "12.1.2018.", "12.1.2019", 1024, 100, 1, 0))
+        con.commit()
+        cur.execute("INSERT INTO udomitelji (ime_prezime, email, razlog, id_zivotinje, ime_ziv) VALUES (?,?,?,?,?)", ("Martina Nemet", "mnemet@pmf", "neki", 2, "bobi"))
         con.commit()
 
         print("Uspješno unesen mačak")
@@ -59,6 +75,8 @@ def demoPodaci():
         con.rollback()
 
     con.close()
+
+##Zivotinja - metode
     
 def samoMace():
     con = sqlite3.connect('baza_podataka.db')   
@@ -107,21 +125,6 @@ def sortiranje():
     con.close()
     return rows
 
-
-
-def idRadnika(username):
-    con = sqlite3.connect('baza_podataka.db')
-    try:
-        cur = con.cursor()
-        rows = cur.execute('SELECT * FROM radnici WHERE username = (?)', (username,))
-        result = cur.fetchone()
-
-    except Exception as e:
-        print("Error at azurirajZivotinju: ", e)
-        con.rollback
-    con.close()
-    return result[0]
-
 def citajPodatke():
     
     con = sqlite3.connect("baza_podataka.db")
@@ -139,106 +142,6 @@ def citajPodatke():
     con.close()
     return podaci
 
-def citajPodatkeLog(idRadnika):
-    
-    con = sqlite3.connect("baza_podataka.db")
-    try:
-        cur = con.cursor()
-        cur.execute("""SELECT * FROM animals WHERE id_radnika = (?) """ , (idRadnika,))
-
-        podaci = cur.fetchall()
-
-
-    except Exception as e:
-        print("Greška kod citanja", e)
-        con.rollback()
-
-    con.close()
-    return podaci
-
-
-
-def dohvati_id_ziv():
-    
-    con = sqlite3.connect("baza_podataka.db")
-    try:
-        cur = con.cursor()
-        cur.execute("""SELECT * FROM animals """)
-
-        podaci = cur.fetchall()
-        for z in podaci:
-            global id_zivotinje
-            id_zivotinje=z[0]
-
-    except Exception as e:
-        print("Greška kod citanja", e)
-        con.rollback()
-
-    con.close()
-    return id_zivotinje
-            
-def citajRadnika():
-    
-    try:
-        cur.execute("""SELECT * FROM radnici """)
-
-        podaci_r = cur.fetchall()
-
-        
-
-    except Exception as e:
-        print("Greška kod citanja", e)
-        con.rollback()
-
-    return podaci_r
-
-def signUpRadnik(ime_prezime, username, password1, password2):
-    con = sqlite3.connect("baza_podataka.db")
-    test = False
-    try:
-        cur = con.cursor()
-        cur.execute('SELECT username FROM radnici WHERE username= ?',(username,))
-        test = cur.fetchone()
-        if test == None:
-            if password1 == password2:
-                cur.execute('INSERT INTO radnici VALUES (null, ?,?,?)', (ime_prezime, username, password1))
-                con.commit()
-                test = True
-                print("You have created an account")
-            else:
-                test = False
-                print("Wrong password")
-        else:
-            testing=False
-            print("Username already exists!")
-    except Exception as e:
-        print("Error at signUpUser: ",e)
-        con.rollback
-        
-    con.close()
-    return test
-
-
-def logInRadnik(username, password):
-    con = sqlite3.connect("baza_podataka.db")
-    testing = False
-    try:
-        cur=con.cursor()
-        id1 = cur.execute('SELECT * FROM radnici WHERE username = (?) AND sifra = (?)', (username, password,))
-        id1 = cur.fetchone()
-        if id1 != None:
-            print("Correct username and password")
-            testing = True
-        else:
-            print("Wrong password or username")
-            testing = False
-    except Exception as e:
-        print("Error at logInUser: ",e)
-        con.rollback
-    con.close()
-    return testing
-    
-            
 
 def sacuvaj_zivotinju(ime, vrsta, dob, spol, zdr_stanje, dat_dolaska, dat_odlaska, financije, interes, id_radnika, udomljen):
     
@@ -262,26 +165,6 @@ def sacuvaj_zivotinju(ime, vrsta, dob, spol, zdr_stanje, dat_dolaska, dat_odlask
         con.rollback()
     con.close()
 
-    
-    
-def sacuvaj_radnika(ime_prezime, username, sifra):
-    con = sqlite3.connect("baza_podataka.db")
-
-    try:
-
-        cur = con.cursor()
-        cur.execute("INSERT INTO radnici (ime_prezime, username, sifra) VALUES (?, ?, ?)", (ime_prezime, username, sifra))
-        con.commit()
-
-        print("Uspjesno dodan novi radnik")
-        
-    except Exception as e:
-        print("Greška", e)
-        con.rollback()
-
-    con.close()
-
-
 def dohvati_id_zivotinje(animal_id):
     con = sqlite3.connect("baza_podataka.db")
     animal = None
@@ -295,27 +178,6 @@ def dohvati_id_zivotinje(animal_id):
         animal = Animal(podaci[0], podaci[1], podaci[2], podaci[3], podaci[4],podacia[5], podaci[6], podaci[7], podaci[8], podaci[9], podaci[10], podaci[11])
 
         print("Uspjesno dohvacena zivotinja")
-        
-    except Exception as e:
-        print("Greška", e)
-        con.rollback()
-
-    con.close()
-    return animal
-
-def dohvati_id_radnika(radnik_id):
-    con = sqlite3.connect("baza_podataka.db")
-    radnik = None
-
-    try:
-        cur = con.cursor()
-        cur.execute("SELECT ime_prezime, username, sifra FROM radnici WHERE id=?;", (radnik_id))
-        podaci = cur.fetchall()
-
-        print("Podaci : ", podaci)
-        radnik = Radnik(podaci[0], podaci[1], podaci[2], podaci[3])
-
-        print("Uspjesno dohvacen radnik")
         
     except Exception as e:
         print("Greška", e)
@@ -370,30 +232,188 @@ def interes(idd):
     con.close()   
 
 
-def udom(idd):
-    print(idd)
+
+
+def prihvatiZ(idd, iddU, vrijeme):
     con = sqlite3.connect("baza_podataka.db")
     try:
         cur = con.cursor()
-
         cur.execute('SELECT * FROM animals WHERE id = (?)', (idd,))
-        cur.execute('UPDATE animals SET udomljen = (?) WHERE id = (?)', (1, idd,))
+        cur.execute('UPDATE animals SET udomljen = (?), dat_odlaska = (?) WHERE id = (?)', (1, vrijeme, idd,))
+        cur.execute('SELECT * FROM udomitelji WHERE id = (?)', (iddU,))
+        cur.execute('UPDATE udomitelji SET prihvaceno = (?) WHERE id = (?)', (1, iddU,))
         con.commit()
     
     except Exception as e:
-        print("Error at lajk: ", e)
+        print("Error at udomi: ", e)
         con.rollback
-    con.close()   
+    con.close()
+    
+
+def imeZivotinje(idd):
+    con = sqlite3.connect('baza_podataka.db')
+    try:
+        cur = con.cursor()
+        rows = cur.execute('SELECT * FROM animals WHERE id = (?)', (idd,))
+        result = cur.fetchone()
+
+    except Exception as e:
+        print("Error at imeziv: ", e)
+        con.rollback
+    con.close()
+    return result[1]
+
+##Radnici - metode
+
+def idRadnika(username):
+    con = sqlite3.connect('baza_podataka.db')
+    try:
+        cur = con.cursor()
+        rows = cur.execute('SELECT * FROM radnici WHERE username = (?)', (username,))
+        result = cur.fetchone()
+
+    except Exception as e:
+        print("Error at azurirajZivotinju: ", e)
+        con.rollback
+    con.close()
+    return result[0]
+
+def citajPodatkeLog(idRadnika):
+    
+    con = sqlite3.connect("baza_podataka.db")
+    try:
+        cur = con.cursor()
+        cur.execute("""SELECT * FROM animals WHERE id_radnika = (?) """ , (idRadnika,))
+
+        podaci = cur.fetchall()
+
+
+    except Exception as e:
+        print("Greška kod citanja", e)
+        con.rollback()
+
+    con.close()
+    return podaci
+
+
+def signUpRadnik(ime_prezime, username, password1, password2):
+    con = sqlite3.connect("baza_podataka.db")
+    test = False
+    try:
+        cur = con.cursor()
+        cur.execute('SELECT username FROM radnici WHERE username= ?',(username,))
+        test = cur.fetchone()
+        if test == None:
+            if password1 == password2:
+                cur.execute('INSERT INTO radnici VALUES (null, ?,?,?)', (ime_prezime, username, password1))
+                con.commit()
+                test = True
+                print("You have created an account")
+            else:
+                test = False
+                print("Wrong password")
+        else:
+            testing=False
+            print("Username already exists!")
+    except Exception as e:
+        print("Error at signUpUser: ",e)
+        con.rollback
+        
+    con.close()
+    return test
+
+
+def logInRadnik(username, password):
+    con = sqlite3.connect("baza_podataka.db")
+    testing = False
+    try:
+        cur=con.cursor()
+        id1 = cur.execute('SELECT * FROM radnici WHERE username = (?) AND sifra = (?)', (username, password,))
+        id1 = cur.fetchone()
+        if id1 != None:
+            print("Correct username and password")
+            testing = True
+        else:
+            print("Wrong password or username")
+            testing = False
+    except Exception as e:
+        print("Error at logInUser: ",e)
+        con.rollback
+    con.close()
+    return testing
+    
+    
+def sacuvaj_radnika(ime_prezime, username, sifra):
+    con = sqlite3.connect("baza_podataka.db")
+
+    try:
+
+        cur = con.cursor()
+        cur.execute("INSERT INTO radnici (ime_prezime, username, sifra) VALUES (?, ?, ?)", (ime_prezime, username, sifra))
+        con.commit()
+
+        print("Uspjesno dodan novi radnik")
+        
+    except Exception as e:
+        print("Greška", e)
+        con.rollback()
+
+    con.close()
+
+
+   
+
+##Udomitelji- metode
+    
+def sacuvaj_udomitelja(ime_prezime, email, razlog, id_zivotinje, ime_ziv, prihvaceno):
+    con = sqlite3.connect("baza_podataka.db")
+
+    try:
+
+        cur = con.cursor()
+        cur.execute("INSERT INTO udomitelji (ime_prezime, email, razlog, id_zivotinje, ime_ziv, prihvaceno) VALUES (?, ?, ?, ?, ?, ?)", (ime_prezime, email, razlog, id_zivotinje, ime_ziv, prihvaceno))
+        con.commit()
+
+        print("Uspjesno dodan udomitelj")
+        
+    except Exception as e:
+        print("Greška kod sacuvaj_udomitelja", e)
+        con.rollback()
+
+    con.close()
 
 
 
+def citajPodatkeUd():
+    
+    con = sqlite3.connect("baza_podataka.db")
+    try:
+        cur = con.cursor()
+        cur.execute("""SELECT * FROM udomitelji """)
+
+        podaci = cur.fetchall()
+        
+    except Exception as e:
+        print("Greška kod citanja", e)
+        con.rollback()
+
+    con.close()
+    return podaci
 
 
 
+def idZodU(idd):
+    con = sqlite3.connect('baza_podataka.db')
+    try:
+        cur = con.cursor()
+        rows = cur.execute('SELECT * FROM udomitelji WHERE id = (?)', (idd,))
+        result = cur.fetchone()
 
-
-
-
+    except Exception as e:
+        print("Error at id: ", e)
+        con.rollback
+    con.close()
+    return result[4]
 
 
 
