@@ -7,9 +7,10 @@ from create_database import citajPodatke,samoMace,samoPsi, prihvatiZ, sacuvaj_zi
      logInRadnik, azuriraj, azurirajZivotinju, interes, idRadnika, citajPodatkeLog, sortiranje, \
      sacuvaj_udomitelja, citajPodatkeUd, idZodU, imeZivotinje
 
+
 citajPodatke()
 save_id=0
-
+user=""
 dirname = os.path.dirname(sys.argv[0])
 template_path = dirname + '\\views'
 app = Bottle()
@@ -250,7 +251,7 @@ def deleteU_deleteU(deleteU):
 @app.route('/prihvati<prihvati:re:[0-9]+>', method=['GET','POST'])
 def prihvati(prihvati):
     idd = prihvati
-    vrijeme = datetime.datetime.now().date()
+    vrijeme = datetime.datetime.now()
     idzivotinje = idZodU(idd)
     prihvatiZ(idzivotinje, idd, vrijeme)
     redirect('/index')

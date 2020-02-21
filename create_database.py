@@ -126,7 +126,7 @@ def sortiranje():
     return rows
 
 def citajPodatke():
-    
+    podaci=""
     con = sqlite3.connect("baza_podataka.db")
     try:
         cur = con.cursor()
@@ -266,17 +266,19 @@ def imeZivotinje(idd):
 ##Radnici - metode
 
 def idRadnika(username):
+    
     con = sqlite3.connect('baza_podataka.db')
     try:
         cur = con.cursor()
         rows = cur.execute('SELECT * FROM radnici WHERE username = (?)', (username,))
         result = cur.fetchone()
+        return result[0]
 
     except Exception as e:
         print("Error at azurirajZivotinju: ", e)
         con.rollback
     con.close()
-    return result[0]
+    
 
 def citajPodatkeLog(idRadnika):
     
@@ -298,6 +300,7 @@ def citajPodatkeLog(idRadnika):
 
 def signUpRadnik(ime_prezime, username, password1, password2):
     con = sqlite3.connect("baza_podataka.db")
+    print("ovdje saaaamm!!!")
     test = False
     try:
         cur = con.cursor()
